@@ -1,0 +1,30 @@
+[
+    {
+        "title": "Python For Beginners",
+        "author": "Justice Bishop",
+        "isbn": "9783161484100",
+        "total_copies": 9,
+        "copies_left": 7
+    },
+    {
+        "title": "Cybersecurity Made Easy",
+        "author": "John Doe",
+        "isbn": "9783161484213",
+        "total_copies": 7,
+        "copies_left": 6
+    },
+    {
+        "title": "A Song Of Ice And Fire",
+        "author": "Gorge R R Martin",
+        "isbn": "9561235901246",
+        "total_copies": 8,
+        "copies_left": 7
+    },
+    {
+        "title": "Plumbing For All",
+        "author": "Austin Wyatt",
+        "isbn": "9783161484298",
+        "total_copies": 1,
+        "copies_left": 1
+    }
+]

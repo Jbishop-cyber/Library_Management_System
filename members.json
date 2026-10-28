@@ -1,0 +1,18 @@
+[
+    {
+        "member_id": "AL001",
+        "name": "Victor Emeka",
+        "borrowed_books": [
+            "9561235901246",
+            "9783161484100"
+        ]
+    },
+    {
+        "member_id": "AL002",
+        "name": "Dami Olorunfemi",
+        "borrowed_books": [
+            "9783161484100",
+            "9783161484213"
+        ]
+    }
+]
