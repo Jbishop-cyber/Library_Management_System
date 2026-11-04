@@ -22,8 +22,7 @@ def ask_yes_or_no(prompt):
 
 def display_books(books):
     if not books:
-        print("There are no books in the library!")
-        return
+        return "There are no books in the library!"
 
     header = (
         f"{'No':<5} {'Title':<25} {'Author':^20} "
@@ -373,6 +372,7 @@ def view_available_books(books):
 
 def view_borrowed_books(books, members=None):
     borrowed_books = []
+
     for book in books:
         if book["total_copies"] - book["copies_left"] > 0:
             borrowed_books.append(book)
@@ -382,27 +382,28 @@ def view_borrowed_books(books, members=None):
         return
 
     header = (
-        f"{'No':<5} {'Title':<25} {'Author':^20} "
-        f"{'ISBN':^13} {'Borrowed':^10} {'Copies_Left':^12}"
+        f"{'No':<5} {'ISBN':<15} {'Book Title':<25} {'Author':<20}"
     )
+
     if members is not None:
-        header += f" {'Borrowed By':<25}"
+        header += f" {'Borrower':<25}"
 
     print(header)
     print("-" * len(header))
 
     for number, book in enumerate(borrowed_books, start=1):
-        borrowed = book["total_copies"] - book["copies_left"]
         row = (
-            f"{number:<5} {book['title']:<25} {book['author']:^20} "
-            f"{book['isbn']:<13} {borrowed:^10} {book['copies_left']:^12}"
+            f"{number:<5} {book['isbn']:<15} "
+            f"{book['title']:<25} {book['author']:<20}"
         )
 
         if members is not None:
             holders = []
+
             for member in members:
                 if book["isbn"] in member["borrowed_books"]:
                     holders.append(member["name"])
+
             row += f" {', '.join(holders):<25}"
 
         print(row)

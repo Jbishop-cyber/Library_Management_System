@@ -1,3 +1,4 @@
+from library import ask_yes_or_no
 import json
 
 
@@ -28,6 +29,71 @@ def register_member(members):
     print(f"ID: {new_member['member_id']}")
     print(f"Name: {new_member['name']}")
     print("Keep this ID safe, you need it to log in.")
+
+
+def remove_member(members):
+    if not members:
+        return "There are no registered members!"
+    
+    while True:
+        info = input("Enter member ID (or press c to cancel): ").strip().upper()
+
+        if info.lower() == 'c':
+            print("Cancelled!")
+            return
+        
+        found = None
+        for member in members:
+            if member["member_id"] == info:
+                found = member
+                break
+
+        if found is None:
+            print(f'There is no member with ID {info}')
+            continue
+
+        if member["borrowed_books"]:
+            print("This member still has borrowed books.")
+            print("Ensure all books are returned before removing this member.")
+            continue
+        
+        else:
+            print("Member Details")
+            print(
+                f"ID: {member['member_id']}\n"
+                f"Name: {member['name']}"
+            )
+            
+        choice = ask_yes_or_no("Are you sure you want to remove this member? (Y/N): ")
+
+        if choice:
+            members.remove(found)
+            print("Member removed successfully!")
+            break
+        else:
+            print("Deletion Cancelled!")
+        
+        if not ask_yes_or_no("Do you want to delete another member? (Y/N)"):
+            break
+
+
+def view_all_members(members):
+    if not members:
+        return "There are no registered members!"
+    
+    header = (
+        f"{'No':<5} {'Member ID':^20} {'Name':^20} "
+        f"{'Books Borrowed':^10}"
+    )
+
+    print(header)
+    print("-" * len(header))
+
+    for numbers, item in enumerate(members, start=1):
+        print(
+            f"{numbers:<5} {item['member_id']:^20} "
+            f"{item['name']:^20} {len(item['borrowed_books']):^10}"
+        )
 
 
 def save_member_json(members):

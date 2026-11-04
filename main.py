@@ -7,7 +7,13 @@ from library import (
 
 from book import (load_book_json, save_book_json)
 
-from member import (register_member, load_member_json, save_member_json)
+from member import (
+    register_member,
+    remove_member,
+    view_all_members,
+    load_member_json,
+    save_member_json
+)
 
 ADMIN_PASSWORD = "Admin"
 
@@ -74,9 +80,11 @@ def admin_menu(books, members):
         print("2. Remove books")
         print("3. Search for books")
         print("4. Register members")
-        print("5. View available books")
-        print("6. View borrowed books")
-        print("7. Log out")
+        print("5. Remove member")
+        print("6. View all members")
+        print("7. View available books")
+        print("8. View borrowed books")
+        print("9. Log out")
 
         try:
             choice = int(input("What do you want to do? "))
@@ -97,10 +105,15 @@ def admin_menu(books, members):
             register_member(members)
             save_member_json(members)
         elif choice == 5:
-            view_available_books(books)
+            remove_member(members)
+            save_member_json(members)
         elif choice == 6:
-            view_borrowed_books(books, members)
+            view_all_members(members)
         elif choice == 7:
+            view_available_books(books)
+        elif choice == 8:
+            view_borrowed_books(books, members)
+        elif choice == 9:
             print("Logged out.")
             return
         else:
