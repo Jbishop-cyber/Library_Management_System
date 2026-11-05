@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Bishop's Library{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Bishop's Library</h1>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/books">Books</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>&copy; 2026 Bishop's Library</p>
+    </footer>
+
+</body>
+
+</html>

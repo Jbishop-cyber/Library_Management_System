@@ -1,6 +1,9 @@
 from library import ask_yes_or_no
 import json
 
+# TODO: if the highest-numbered member is removed, this reuses their ID
+# next_number = max(...)
+
 
 def register_member(members):
     while True:
@@ -33,10 +36,11 @@ def register_member(members):
 
 def remove_member(members):
     if not members:
-        return "There are no registered members!"
+        print("There are no registered members!")
+        return
     
     while True:
-        info = input("Enter member ID (or press c to cancel): ").strip().upper()
+        info = input("Enter member ID (or press c to cancel): ").strip()
 
         if info.lower() == 'c':
             print("Cancelled!")
@@ -52,7 +56,7 @@ def remove_member(members):
             print(f'There is no member with ID {info}')
             continue
 
-        if member["borrowed_books"]:
+        if found["borrowed_books"]:
             print("This member still has borrowed books.")
             print("Ensure all books are returned before removing this member.")
             continue
@@ -60,8 +64,8 @@ def remove_member(members):
         else:
             print("Member Details")
             print(
-                f"ID: {member['member_id']}\n"
-                f"Name: {member['name']}"
+                f"ID: {found['member_id']}\n"
+                f"Name: {found['name']}"
             )
             
         choice = ask_yes_or_no("Are you sure you want to remove this member? (Y/N): ")
@@ -69,21 +73,26 @@ def remove_member(members):
         if choice:
             members.remove(found)
             print("Member removed successfully!")
-            break
         else:
-            print("Deletion Cancelled!")
-        
+            print("Removal Cancelled!")
+
+
+        if not members:
+            print("No member left.")
+            break
+
         if not ask_yes_or_no("Do you want to delete another member? (Y/N)"):
             break
 
 
 def view_all_members(members):
     if not members:
-        return "There are no registered members!"
+        print("There are no registered members!")
+        return
     
     header = (
         f"{'No':<5} {'Member ID':^20} {'Name':^20} "
-        f"{'Books Borrowed':^10}"
+        f"{'Books Borrowed':^16}"
     )
 
     print(header)
@@ -92,7 +101,7 @@ def view_all_members(members):
     for numbers, item in enumerate(members, start=1):
         print(
             f"{numbers:<5} {item['member_id']:^20} "
-            f"{item['name']:^20} {len(item['borrowed_books']):^10}"
+            f"{item['name']:^20} {len(item['borrowed_books']):^16}"
         )
 
 
