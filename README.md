@@ -46,7 +46,7 @@ web_app/
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Jbishop-cyber/Library_Management_System.git
 ```
 
 2. Navigate into the project directory:
